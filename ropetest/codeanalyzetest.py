@@ -468,21 +468,21 @@ class ScopeNameFinderTest(unittest.TestCase):
             name_finder.get_pyname_at(code.index('pass'))
 
     def test_one_liners(self):
-        code = 'var = 1\ndef f(): var = 2\nprint var\n'
+        code = 'var = 1\ndef f(): var = 2\nprint(var)\n'
         pymod = libutils.get_string_module(self.project, code)
         name_finder = rope.base.evaluate.ScopeNameFinder(pymod)
         pyname = name_finder.get_pyname_at(code.rindex('var'))
         self.assertEquals(pymod['var'], pyname)
 
     def test_one_liners_with_line_breaks(self):
-        code = 'var = 1\ndef f(\n): var = 2\nprint var\n'
+        code = 'var = 1\ndef f(\n): var = 2\nprint(var)\n'
         pymod = libutils.get_string_module(self.project, code)
         name_finder = rope.base.evaluate.ScopeNameFinder(pymod)
         pyname = name_finder.get_pyname_at(code.rindex('var'))
         self.assertEquals(pymod['var'], pyname)
 
     def test_one_liners_with_line_breaks2(self):
-        code = 'var = 1\ndef f(\np): var = 2\nprint var\n'
+        code = 'var = 1\ndef f(\np): var = 2\nprint(var)\n'
         pymod = libutils.get_string_module(self.project, code)
         name_finder = rope.base.evaluate.ScopeNameFinder(pymod)
         pyname = name_finder.get_pyname_at(code.rindex('var'))
